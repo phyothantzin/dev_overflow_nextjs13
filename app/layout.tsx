@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: "Dev Overflow",
   description: "A community-driven pl",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/app/favicon.ico",
   },
 };
 

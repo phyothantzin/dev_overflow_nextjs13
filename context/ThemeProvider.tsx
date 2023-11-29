@@ -13,7 +13,11 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const handleThemeChange = () => {
-      if (mode === "dark") {
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
         setMode("dark");
         document.documentElement.classList.add("dark");
       } else {

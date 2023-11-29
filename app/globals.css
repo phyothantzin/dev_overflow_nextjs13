@@ -2,20 +2,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 body {
   font-family: "Inter", sans-serif;
 }
-
 @layer utilities {
   .flex-center {
     @apply flex justify-center items-center;
   }
-
   .flex-between {
     @apply flex justify-between items-center;
   }
-
   .flex-start {
     @apply flex justify-start items-center;
   }
@@ -49,7 +45,7 @@ body {
   }
 }
 .no-focus {
-  @apply focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
+  @apply focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0;
 }
 .active-theme {
   filter: invert(53%) sepia(98%) saturate(3332%) hue-rotate(0deg)
