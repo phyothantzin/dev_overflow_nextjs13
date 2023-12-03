@@ -6,50 +6,50 @@ import RenderTag from "./RenderTag";
 const RightSidebar = () => {
   const hotQuestions = [
     {
-      _id: 1,
+      _id: "1",
       title: "How do I use express as a custom server in NextJS?",
     },
     {
-      _id: 2,
+      _id: "2",
       title: "Cascading Deletes in SQLAlchemy?",
     },
     {
-      _id: 3,
+      _id: "3",
       title: "How do I use MongoDB in NextJS?",
     },
     {
-      _id: 4,
+      _id: "4",
       title: "How do i use CSR in NextJS?",
     },
     {
-      _id: 5,
+      _id: "5",
       title: "How to change SSR to CSR in NextJS?",
     },
   ];
 
   const popularTags = [
     {
-      _id: 1,
+      _id: "1",
       name: "Javascript",
       totalQuestions: 5,
     },
     {
-      _id: 2,
+      _id: "2",
       name: "React",
       totalQuestions: 10,
     },
     {
-      _id: 3,
+      _id: "3",
       name: "NextJS",
       totalQuestions: 20,
     },
     {
-      _id: 4,
+      _id: "4",
       name: "Java",
       totalQuestions: 3,
     },
     {
-      _id: 5,
+      _id: "5",
       name: "PHP",
       totalQuestions: 1,
     },
