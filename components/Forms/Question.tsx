@@ -17,13 +17,17 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { QuestionFormSchema } from "@/lib/validations";
+import { useRouter, usePathname } from "next/navigation";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { createQuestion } from "@/lib/actions/question.action";
 
 const type: any = "create";
 
-const Question = () => {
+const Question = ({ userId }: { userId: string }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -74,7 +78,14 @@ const Question = () => {
     setIsSubmitting(true);
 
     try {
-      await createQuestion({});
+      await createQuestion({
+        title: values.title,
+        explanation: values.explanation,
+        tags: values.tags,
+        author: JSON.parse(userId),
+      });
+
+      router.push("/");
     } catch (err) {
       console.error(err);
     } finally {
@@ -134,7 +145,7 @@ const Question = () => {
                   onEditorChange={(content) => field.onChange(content)}
                   initialValue=""
                   init={{
-                    height: 350,
+                    height: 400,
                     menubar: false,
                     plugins: [
                       "advlist",
@@ -154,11 +165,11 @@ const Question = () => {
                       "table",
                     ],
                     toolbar:
-                      "undo redo | blocks | " +
-                      "codesample | bold italic forecolor | alignleft aligncenter " +
+                      "undo redo | " +
+                      "codesample | bold italic forecolor | alignleft aligncenter |" +
                       "alignright alignjustify | bullist numlist",
                     content_style:
-                      "body { font-family:Inter; font-size:16px; }",
+                      "body { font-family:'Inter'; font-size:16px; }",
                   }}
                 />
               </FormControl>
