@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { QuestionFormSchema } from "@/lib/validations";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import { createQuestion } from "@/lib/actions/question.action";
 
 const type: any = "create";
 
@@ -69,15 +70,16 @@ const Question = () => {
     form.setValue("tags", newTags);
   };
 
-  function onSubmit(values: z.infer<typeof QuestionFormSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionFormSchema>) {
     setIsSubmitting(true);
 
-    // try {
-
-    // } catch (error) {
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+    try {
+      await createQuestion({});
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -128,6 +130,8 @@ const Question = () => {
                     // @ts-ignore
                     (editorRef.current = editor)
                   }
+                  onBlur={field.onBlur}
+                  onEditorChange={(content) => field.onChange(content)}
                   initialValue=""
                   init={{
                     height: 350,
@@ -154,7 +158,7 @@ const Question = () => {
                       "codesample | bold italic forecolor | alignleft aligncenter " +
                       "alignright alignjustify | bullist numlist",
                     content_style:
-                      "body { font-family:Inter; font-size:16px;  }",
+                      "body { font-family:Inter; font-size:16px; }",
                   }}
                 />
               </FormControl>
