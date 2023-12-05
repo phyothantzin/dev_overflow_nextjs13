@@ -83,6 +83,7 @@ const Question = ({ userId }: { userId: string }) => {
         explanation: values.explanation,
         tags: values.tags,
         author: JSON.parse(userId),
+        path: pathname,
       });
 
       router.push("/");
@@ -169,7 +170,7 @@ const Question = ({ userId }: { userId: string }) => {
                       "codesample | bold italic forecolor | alignleft aligncenter |" +
                       "alignright alignjustify | bullist numlist",
                     content_style:
-                      "body { font-family:'Inter'; font-size:16px; }",
+                      "body { font-family: Inter; font-size: 16px; }",
                   }}
                 />
               </FormControl>

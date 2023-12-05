@@ -3,19 +3,36 @@
 import Question from "@/database/question.model";
 import { connectDB } from "../mongoose";
 import Tag from "@/database/tag.model";
+import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
+import { revalidatePath } from "next/cache";
 
-interface IParams {
-  title: string;
-  explanation: string;
-  tags: string[];
-  author: string;
+export async function getQuestions(params: GetQuestionsParams) {
+  try {
+    connectDB();
+    const questions = await Question.find({})
+      .populate({
+        path: "tags",
+        model: Tag,
+      })
+      .populate({
+        path: "author",
+        model: "User",
+      })
+      .sort({
+        createdAt: -1,
+      });
+
+    return { questions };
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-export async function createQuestion(params: IParams) {
+export async function createQuestion(params: CreateQuestionParams) {
   try {
     connectDB();
 
-    const { title, explanation, tags, author } = params;
+    const { title, explanation, tags, author, path } = params;
 
     // create a question
     const question = await Question.create({
@@ -36,10 +53,11 @@ export async function createQuestion(params: IParams) {
       tagDocuments.push(existingTag._id);
     }
 
-    await Question.findByIdAndUpdate(
-      question._id,
-      { $push: { tags: { $each: tagDocuments } } },
-    );
+    await Question.findByIdAndUpdate(question._id, {
+      $push: { tags: { $each: tagDocuments } },
+    });
+
+    revalidatePath(path);
   } catch (err) {
     console.error(err);
   }
