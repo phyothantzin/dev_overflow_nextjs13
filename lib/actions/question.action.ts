@@ -5,6 +5,7 @@ import { connectDB } from "../mongoose";
 import Tag from "@/database/tag.model";
 import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
 import { revalidatePath } from "next/cache";
+import User from "@/database/user.model";
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
@@ -16,7 +17,7 @@ export async function getQuestions(params: GetQuestionsParams) {
       })
       .populate({
         path: "author",
-        model: "User",
+        model: User,
       })
       .sort({
         createdAt: -1,
