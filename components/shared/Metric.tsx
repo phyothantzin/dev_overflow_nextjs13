@@ -25,13 +25,14 @@ const Metric = ({
     <>
       <Image
         src={imgUrl}
-        width={16}
-        height={16}
+        width={20}
+        height={20}
         alt={alt}
-        className={`object-contain ${href ? "rounded-full" : ""}`}
+        className={`mb-1 object-contain ${href ? "rounded-full" : ""}`}
       />
-      <p className={`${textStyles} mt-1 flex items-center gap-1`}>
-        {value}
+
+      <p className={`${textStyles} flex items-center gap-1`}>
+        <span className="small-regular">{value}</span>
 
         <span
           className={`small-regular line-clamp-1 ${
