@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { QuestionFormSchema } from "@/lib/validations";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation"; // usePathname
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { createQuestion } from "@/lib/actions/question.action";
@@ -26,7 +26,7 @@ const type: any = "create";
 
 const Question = ({ userId }: { userId: string }) => {
   const router = useRouter();
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -83,7 +83,7 @@ const Question = ({ userId }: { userId: string }) => {
         explanation: values.explanation,
         tags: values.tags,
         author: JSON.parse(userId),
-        path: pathname,
+        path: "/",
       });
 
       router.push("/");
