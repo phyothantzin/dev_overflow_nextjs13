@@ -21,10 +21,12 @@ import { useRouter } from "next/navigation"; // usePathname
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { createQuestion } from "@/lib/actions/question.action";
+import { useTheme } from "@/context/ThemeProvider";
 
 const type: any = "create";
 
 const Question = ({ userId }: { userId: string }) => {
+  const { mode } = useTheme();
   const router = useRouter();
   // const pathname = usePathname();
 
@@ -171,6 +173,8 @@ const Question = ({ userId }: { userId: string }) => {
                       "alignright alignjustify | bullist numlist",
                     content_style:
                       "body { font-family: Inter; font-size: 16px; }",
+                    skin: mode === "dark" ? "oxide-dark" : "oxide",
+                    content_css: mode === "dark" ? "dark" : "light",
                   }}
                 />
               </FormControl>
