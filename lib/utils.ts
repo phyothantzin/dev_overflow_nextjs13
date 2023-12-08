@@ -43,3 +43,22 @@ export const formatNumberWithExtension = (number: number): string => {
 
   return result;
 };
+
+// export const formatNumberWithExtension = (number: number): string => {
+//   let result: string;
+
+//   if (typeof number !== 'undefined') {
+//     if (Math.abs(number) >= 1e6) {
+//       result = (number / 1e6).toFixed(1) + "M";
+//     } else if (Math.abs(number) >= 1e3) {
+//       result = (number / 1e3).toFixed(1) + "K";
+//     } else {
+//       result = number.toString();
+//     }
+//   } else {
+//     // Handle the case when number is undefined
+//     result = "N/A"; // Or any other default value or appropriate error handling
+//   }
+
+//   return result;
+// };
