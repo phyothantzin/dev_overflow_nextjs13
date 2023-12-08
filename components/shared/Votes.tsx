@@ -2,6 +2,7 @@
 import { downVoteAnswer, upVoteAnswer } from "@/lib/actions/answer.action";
 import {
   downVoteQuestion,
+  toggleSaveQuestion,
   upVoteQuestion,
 } from "@/lib/actions/question.action";
 import { formatNumberWithExtension } from "@/lib/utils";
@@ -74,7 +75,13 @@ const Votes = ({
     }
   };
 
-  const handleSave = () => {};
+  const handleSave = async () => {
+    await toggleSaveQuestion({
+      userId: JSON.parse(userId),
+      questionId: JSON.parse(itemId),
+      path: pathname,
+    });
+  };
 
   return (
     <div className="flex gap-5">
