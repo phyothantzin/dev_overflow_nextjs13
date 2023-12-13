@@ -16,7 +16,7 @@ interface Props {
   createdAt: Date;
 }
 
-const QuestionCard = ({
+const AnswerCard = ({
   _id,
   clerkId,
   title,
@@ -87,4 +87,4 @@ const QuestionCard = ({
   );
 };
 
-export default QuestionCard;
+export default AnswerCard;

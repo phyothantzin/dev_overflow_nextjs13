@@ -62,3 +62,18 @@ export const formatNumberWithExtension = (number: number): string => {
 
   return result;
 };
+
+export function getMonthAndYear(dateObject: Date): string {
+  // Ensure the input is a Date object
+  if (!(dateObject instanceof Date)) {
+    throw new Error("Invalid input. Please provide a Date object.");
+  }
+
+  // Get the month and year from the Date object
+  const month = dateObject.toLocaleString("default", { month: "long" });
+  const year = dateObject.getFullYear();
+
+  // Format the month and year and return the result
+  const joinedDate = `${month} ${year}`;
+  return joinedDate;
+}

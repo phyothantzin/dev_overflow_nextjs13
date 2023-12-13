@@ -40,8 +40,9 @@ body {
       rgba(19, 22, 28, 0.7) 100%
     );
   }
+
   .tab {
-    @apply min-h-full dark:bg-dark-400 bg-light-800 text-light-5;
+    @apply min-h-full dark:bg-dark-400 bg-light-800 text-light-500 focus:primary-gradient active:primary-gradient focus:text-light-900 active:text-light-900 dark:active:dark-gradient dark:focus:dark-gradient px-4 py-2;
   }
 }
 .no-focus {
