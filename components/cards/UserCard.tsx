@@ -27,9 +27,13 @@ const UserCard = async ({ user }: Props) => {
         <Image
           src={user.picture}
           alt="user profile picture"
+          style={{
+            width: "100px",
+            height: "100px",
+          }}
           width={100}
           height={100}
-          className="rounded-full"
+          className="rounded-full object-cover  "
         />
 
         <div className="mt-4 text-center">
