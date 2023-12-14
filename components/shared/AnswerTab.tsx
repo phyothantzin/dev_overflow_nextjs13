@@ -1,5 +1,6 @@
 import { getUserAnswers } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
+import AnswerCard from "../cards/AnswerCard";
 
 interface Props extends SearchParamsProps {
   userId: string;
@@ -11,20 +12,16 @@ const AnswerTab = async ({ searchParams, userId, clerkId }: Props) => {
   return (
     <>
       {result && result.answers && result.answers.length > 0 ? (
-        result.answers.map((answer) => (
-          <div key={answer._id} className="mt-2">
-            <AnswerCard
-              _id={answer._id}
-              clerkId={clerkId}
-              title={answer.title}
-              tags={answer.tags}
-              author={answer.author}
-              upvotes={answer.upvotes}
-              views={answer.views}
-              answers={answer.answers}
-              createdAt={answer.createdAt}
-            />
-          </div>
+        result.answers.map((item) => (
+          <AnswerCard
+            key={item._id}
+            _id={item._id}
+            clerkId={clerkId}
+            question={item.question}
+            author={item.author}
+            upvotes={item.upvotes}
+            createdAt={item.createdAt}
+          />
         ))
       ) : (
         <></>

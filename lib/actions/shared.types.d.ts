@@ -128,7 +128,7 @@ export interface GetAllUsersParams {
 }
 
 export interface UpdateUserParams {
-  clerkId: string;
+  clerkId: string | null;
   updateData: Partial<IUser>;
   path: string;
 }
