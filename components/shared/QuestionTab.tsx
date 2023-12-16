@@ -19,7 +19,7 @@ const QuestionTab = async ({ searchParams, userId, clerkId }: Props) => {
     <>
       {result && result.questions && result.questions.length > 0 ? (
         result.questions.map((question) => (
-          <div key={question._id} className="mt-2">
+          <div key={question._id}>
             <QuestionCard
               _id={question._id}
               clerkId={clerkId}

@@ -1,4 +1,5 @@
 "use client";
+// @ts-expect-error
 import Prism from "prismjs";
 import parse from "html-react-parser";
 
@@ -35,7 +36,7 @@ const ParseHTML = ({ data }: Props) => {
     Prism.highlightAll();
   }, []);
 
-  return <div>{parse(data)}</div>;
+  return <div className={`markdown w-full min-w-full`}>{parse(data)}</div>;
 };
 
 export default ParseHTML;
