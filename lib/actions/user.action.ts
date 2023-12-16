@@ -283,6 +283,7 @@ export async function getUserInfo(params: GetUserByIdParams) {
       user,
       totalQuestions,
       totalAnswers,
+      reputation: user.reputation,
       badgeCounts,
     };
   } catch (error) {
