@@ -141,6 +141,7 @@ export const assignBadges = (params: BadgeParams) => {
     const badgeLevels = BADGE_CRITERIA[type];
 
     Object.keys(badgeLevels).forEach((level: any) => {
+      // @ts-ignore
       if (count >= badgeLevels[level]) {
         badgeCounts[level as keyof BadgeCounts] += 1;
       }
