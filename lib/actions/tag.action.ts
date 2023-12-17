@@ -10,6 +10,7 @@ import {
 import Tag, { ITag } from "@/database/tag.model";
 import { FilterQuery } from "mongoose";
 import Question from "@/database/question.model";
+import Interaction from "@/database/interaction.model";
 
 export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
   try {
@@ -23,11 +24,23 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
       throw new Error("User not found");
     }
 
-    return [
-      { _id: "1", name: "Html" },
-      { _id: "2", name: "Css" },
-      { _id: "3", name: "Javascript" },
-    ];
+    const userInteractions = await Interaction.find({ user: user._id })
+      .sort({ createdAt: -1 })
+      .populate("tags")
+      .limit(limit)
+      .exec();
+
+    const mostInteractedTags = userInteractions.reduce((tags, interaction) => {
+      if (interaction.tags) {
+        tags = tags.concat(interaction.tags);
+      }
+      return tags;
+    }, []);
+
+    // @ts-ignore
+    const uniqueTags = [...new Set(mostInteractedTags)];
+
+    return uniqueTags;
   } catch (error) {
     console.error(error);
     throw error;
