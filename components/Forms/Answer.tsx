@@ -15,9 +15,9 @@ import { AnswerFormSchema } from "@/lib/validations";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState } from "react";
 import { useTheme } from "@/context/ThemeProvider";
-import Image from "next/image";
 import { createAnswer } from "@/lib/actions/answer.action";
 import { usePathname } from "next/navigation";
+import { toast } from "../ui/use-toast";
 
 interface Props {
   question: string;
@@ -39,25 +39,31 @@ const Answer = ({ question, questionId, authorId }: Props) => {
   });
 
   async function onSubmit(values: z.infer<typeof AnswerFormSchema>) {
-    setIsSubmitting(true);
+    if (authorId) {
+      setIsSubmitting(true);
 
-    try {
-      await createAnswer({
-        answer: values.answer,
-        author: JSON.parse(authorId),
-        question: JSON.parse(questionId),
-        path: pathname,
-      });
+      try {
+        await createAnswer({
+          answer: values.answer,
+          author: JSON.parse(authorId),
+          question: JSON.parse(questionId),
+          path: pathname,
+        });
 
-      form.reset();
-      if (editorRef.current) {
-        const editor = editorRef.current as any;
-        editor.setContent("");
+        form.reset();
+        if (editorRef.current) {
+          const editor = editorRef.current as any;
+          editor.setContent("");
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsSubmitting(false);
       }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsSubmitting(false);
+    } else {
+      toast({
+        title: "Login to submit the answer",
+      });
     }
   }
 
@@ -68,7 +74,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
           Write your answer here
         </h4>
 
-        <Button
+        {/* <Button
           className="btn light-border-2 gap-1.5 rounded-md px-4 py-2.5 text-primary-500 shadow-none dark:text-primary-500"
           onClick={() => {}}
         >
@@ -80,7 +86,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
             className="object-contain"
           />
           Generate an AI answer
-        </Button>
+        </Button> */}
       </div>
 
       <Form {...form}>

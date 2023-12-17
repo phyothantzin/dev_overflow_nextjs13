@@ -15,7 +15,7 @@ import { toast } from "../ui/use-toast";
 interface Props {
   type: string;
   itemId: string;
-  userId: string;
+  userId: string | null;
   upVotes: number;
   downVotes: number;
   hasUpVoted: boolean;
@@ -95,16 +95,22 @@ const Votes = ({
   };
 
   const handleSave = async () => {
-    await toggleSaveQuestion({
-      userId: JSON.parse(userId),
-      questionId: JSON.parse(itemId),
-      path: pathname,
-    });
+    if (!userId) {
+      router.push("/sign-in");
+    }
 
-    return toast({
-      title: `Question ${!hasSaved ? "Saved" : "Unsaved"}`,
-      variant: !hasSaved ? "default" : "destructive",
-    });
+    if (userId) {
+      await toggleSaveQuestion({
+        userId: JSON.parse(userId),
+        questionId: JSON.parse(itemId),
+        path: pathname,
+      });
+
+      return toast({
+        title: `Question ${!hasSaved ? "Saved" : "Unsaved"}`,
+        variant: !hasSaved ? "default" : "destructive",
+      });
+    }
   };
 
   useEffect(() => {
